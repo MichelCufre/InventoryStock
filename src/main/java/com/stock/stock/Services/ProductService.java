@@ -1,13 +1,16 @@
 package com.stock.stock.Services;
 import com.stock.stock.Classes.Product;
+import com.stock.stock.Classes.User;
 import com.stock.stock.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
 
-    private final ProductRepository productRepository;
+    private static ProductRepository productRepository;
 
     @Autowired
     public ProductService(ProductRepository productRepository) {
@@ -47,4 +50,9 @@ public class ProductService {
 
         productRepository.delete(product);
     }
+
+    public static List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+
 }
