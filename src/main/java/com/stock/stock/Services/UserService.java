@@ -10,14 +10,14 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private static UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserService(UserRepository userRepository) {
-        UserService.userRepository = userRepository;
+        this.userRepository = userRepository;
     }
 
-    public static User registerUser(String name, String email, String password, String imgUrl) {
+    public User registerUser(String name, String email, String password, String imgUrl) {
         // Verificar si el user ya existe por email
         if (userRepository.existsByEmail(email)) {
             throw new IllegalArgumentException("Client with email " + email + " already exists!");
@@ -28,7 +28,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public static List<User> getAllUsers() {
+    public  List<User> getAllUsers() {
         return userRepository.findAll();
     }
 

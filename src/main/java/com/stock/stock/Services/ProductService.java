@@ -10,11 +10,11 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    private static ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
     public ProductService(ProductRepository productRepository) {
-        ProductService.productRepository = productRepository;
+        this.productRepository = productRepository;
     }
 
     public Product createProduct(String name, String description, Double price, String imgUrl, Integer qty) {
@@ -35,11 +35,21 @@ public class ProductService {
     public Product updateProduct(Long id, String name, String description, Double price, String imgUrl, Integer qty) {
         Product product = getProductById(id);
 
-        product.setName(name);
-        product.setDescription(description);
-        product.setPrice(price);
-        product.setImgUrl(imgUrl);
-        product.setQuantity(qty);
+        if (name != null && !name.trim().isEmpty()) {
+            product.setName(name);
+        }
+        if (description != null && !description.trim().isEmpty()) {
+            product.setDescription(description);
+        }
+        if (price != null) {
+            product.setPrice(price);
+        }
+        if (imgUrl != null && !imgUrl.trim().isEmpty()) {
+            product.setImgUrl(imgUrl);
+        }
+        if (qty != null) {
+            product.setQuantity(qty);
+        }
 
         productRepository.save(product);
         return product;
@@ -51,8 +61,14 @@ public class ProductService {
         productRepository.delete(product);
     }
 
-    public static List<Product> getAllProducts() {
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    public Integer getQty(Long id) {
+        Product product = getProductById(id);
+
+        return product.getQuantity();
     }
 
 }
