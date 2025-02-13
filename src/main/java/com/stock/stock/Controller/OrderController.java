@@ -17,7 +17,7 @@ public class OrderController {
 
     @PostMapping("/register")
     public ResponseEntity<Order> registerOrder(@RequestBody Order order) {
-        Order newOrder = orderService.createOrder(order.getProductList(), order.getUserName())
+        Order newOrder = orderService.createOrder(order.getProductList(), order.getUserName());
         return ResponseEntity.status(HttpStatus.CREATED).body(newOrder);
     }
 

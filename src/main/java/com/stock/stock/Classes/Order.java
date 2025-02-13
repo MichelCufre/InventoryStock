@@ -9,14 +9,16 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private List<Product> productList;
     private String userName;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> productList; // Relación con los productos seleccionados
+
 
     public Order() {
     }
 
-    public Order(List<Product> productList, String userName) {
+    public Order(List<OrderItem> productList, String userName) {
         this.productList = productList;
         this.userName = userName;
     }
@@ -29,11 +31,11 @@ public class Order {
         this.id = id;
     }
 
-    public List<Product> getProductList() {
+    public List<OrderItem> getProductList() {
         return productList;
     }
 
-    public void setProductList(List<Product> productList) {
+    public void setProductList(List<OrderItem> productList) {
         this.productList = productList;
     }
 

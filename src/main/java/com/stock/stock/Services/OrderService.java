@@ -1,12 +1,15 @@
 package com.stock.stock.Services;
 
 import com.stock.stock.Classes.Order;
+import com.stock.stock.Classes.OrderItem;
 import com.stock.stock.Classes.Product;
 import com.stock.stock.Repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+@Service
 public class OrderService {
     private final OrderRepository orderRepository;
 
@@ -15,7 +18,7 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public Order createOrder(List<Product>productList, String userName) {
+    public Order createOrder(List<OrderItem>productList, String userName) {
 
         Order order = new Order(productList, userName);
         orderRepository.save(order);
