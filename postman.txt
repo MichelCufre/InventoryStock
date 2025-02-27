@@ -1,0 +1,21 @@
+POST http://localhost:8080/api/products/register
+
+{
+  "name": "Producto Ejemplo 1",
+  "description": "Descripción detallada del producto",
+  "price": 199.99,
+  "imgUrl": "http://example.com/imagen-del-producto.jpg",
+  "quantity": 50
+}
+
+GET http://localhost:8080/api/products
+
+POST http://localhost:8080/api/users/register
+{
+  "name": "Juan Perez",
+  "email": "juan.perez@example.com",
+  "password": "miContraseña123",
+  "imgUrl": "http://example.com/imagen.jpg"
+}
+
+GET http://localhost:8080/api/users

@@ -1,5 +1,7 @@
 package com.stock.stock.Classes;
 import jakarta.persistence.*;
+
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -10,7 +12,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userName;
-
+    private Date date;
+    private Long ticketId;
+    private String clientName;
+        
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> productList; // Relación con los productos seleccionados
 
